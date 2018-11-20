@@ -1,0 +1,396 @@
+@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Pacifico);
+/* line 3, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+body {
+  background: #fff;
+  color: #fff;
+  font-family: 'museo-sans-rounded', sans-serif;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  width: 320px;
+}
+/* line 13, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.container {
+  background-color: #ccc;
+  text-align: center;
+  /* overflow: hidden; */
+  /* height: 100%; */
+}
+/* line 20, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.title {
+  background-color: #fff;
+  color: #a5a9ba;
+  font-family: 'Pacifico', cursive;
+  font-size: 18px;
+  padding: 16px;
+  margin: 0;
+  text-align: center;
+}
+/* line 30, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.image {
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 320px;
+  background: #353434;
+}
+/* line 38, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.popup {
+  background-color: rgba(0, 0, 0, 0.7);
+  box-sizing: border-box;
+  color: #fff;
+  font-size: 20px;
+  height: 540px;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  /* padding: 15px; */
+  position: absolute;
+  text-align: center;
+  top: 0;
+  width: 100%;
+  left: 0;
+  z-index: -1;
+  /* top: 60px; */
+  right: 0;
+  margin: 0 auto;
+}
+/* line 61, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.popup.is-visible {
+  display: block;
+  opacity: 1;
+  padding: 0 !important;
+  z-index: 60;
+  /* margin: -15px; */
+}
+/* line 69, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.popup_header {
+  margin-top: 160px;
+  font-weight: 300;
+}
+/* line 74, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.popup_input {
+  border: 0;
+  box-sizing: border-box;
+  font-size: 18px;
+  height: 50px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  width: 250px;
+}
+/* line 86, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.popup_button {
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  width: 250px;
+  height: 50px;
+}
+/* line 96, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.stickers {
+  background-color: #fff;
+  border: 1px solid #000;
+  border-right: 0;
+  right: -85px;
+  position: absolute;
+  top: 55px;
+  width: 60px;
+  z-index: 999;
+}
+/* line 107, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.sticker {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+}
+/* line 113, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.sticker img,
+.ui-draggable {
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+}
+/* line 119, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.ui-draggable.dropped {
+  position: absolute;
+}
+/* line 123, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.image_camera {
+  /* background-color: #5a5a5a; */
+  opacity: 1;
+  transition: opacity 0.5s ease-out;
+  -moz-transition: opacity 0.5s ease-out;
+  -webkit-transition: opacity 0.5s ease-out;
+  -o-transition: opacity 0.5s ease-out;
+  position: absolute;
+  top: 40px;
+}
+/* line 134, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.image_camera.is-visible {
+  opacity: 1;
+  z-index: 125;
+}
+/* line 139, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+#camera {
+  width: 100%;
+}
+/* line 143, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.overlay-left,
+.overlay-right {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 240px;
+  position: absolute;
+  top: 0;
+  width: 50px;
+}
+/* line 152, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.overlay-right {
+  right: 0;
+}
+/* line 156, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.canvas-wrapper {
+  height: 380px;
+  overflow: hidden;
+}
+/* line 161, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.canvas-wrapper.is-hidden {
+  opacity: 0;
+}
+/* line 165, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+#original {
+  display: none;
+}
+/* line 169, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.image_canvas {
+  background-color: #000000;
+  height: 100%;
+  left: -100px;
+  position: relative;
+}
+/* line 176, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.image_buttons {
+  bottom: 0;
+  height: 50px;
+  position: absolute;
+  text-align: center;
+  width: 320px;
+}
+/* line 184, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-download {
+  cursor: pointer;
+  display: none;
+  font-size: 25px;
+  left: 10px;
+  position: absolute;
+  top: 10px;
+  z-index: 1;
+}
+/* line 194, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-download.is-visible {
+  display: block;
+}
+/* line 198, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-left,
+.button-center,
+.button-right {
+  cursor: pointer;
+  display: inline-block;
+  font-size: 25px;
+  height: 20px;
+  position: absolute;
+  width: 30px;
+  z-index: 2;
+}
+/* line 210, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-download:hover,
+.button-left:hover,
+.button-center:hover,
+.button-right:hover {
+  opacity: .5;
+}
+/* line 217, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-download.is-hidden,
+.button-left.is-hidden,
+.button-center.is-hidden,
+.button-right.is-hidden {
+  opacity: .0;
+}
+/* line 224, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-left {
+  left: 40px;
+}
+/* line 228, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-center {
+  border-color: rgba(255, 255, 255, 0);
+  width: 50px;
+  height: 50px;
+  position: relative;
+}
+/* line 235, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-center.is-visible {
+  border-color: #ffffff;
+}
+/* line 239, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.icon-camera {
+  position: relative;
+  top: 12px;
+}
+/* line 244, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-right {
+  /*display: none;*/
+  right: 40px;
+  font-size: 30px;
+}
+/* line 250, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+#image,
+.filter_image {
+  height: 100%;
+  position: relative;
+}
+/* line 256, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+#image {
+  /* left: -50%; */
+}
+/* line 260, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.bar {
+  background-color: #fff;
+  padding: 4px 0 0 0;
+  text-align: center;
+}
+/* line 266, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.filter {
+  border: 0;
+  cursor: pointer;
+  display: inline-block;
+  height: 76px;
+  overflow: hidden;
+  width: 76px;
+}
+/* line 275, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.filter:hover {
+  opacity: .8;
+}
+/* line 279, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.bar canvas {
+  background-color: #a5a9ba;
+  height: 100%;
+  position: relative;
+  left: -10px;
+}
+/* grayscale */
+/* line 287, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="1"] {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+}
+/* sepia */
+/* line 293, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="2"] {
+  -webkit-filter: sepia(1);
+  filter: sepia(1);
+}
+/* saturate */
+/* hue-rotate */
+/* line 303, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="4"] {
+  -webkit-filter: hue-rotate(90deg);
+  filter: hue-rotate(90deg);
+}
+/* brightness */
+/* line 309, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="5"] {
+  -webkit-filter: brightness(3);
+  filter: brightness(3);
+}
+/* contrast */
+/* line 315, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="6"] {
+  -webkit-filter: contrast(4);
+  filter: contrast(4);
+}
+/* blur */
+/* line 321, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="7"] {
+  -webkit-filter: blur(5px);
+  filter: blur(5px);
+}
+/* invert */
+/* line 327, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-filter="8"] {
+  -webkit-filter: invert(100);
+  filter: invert(100);
+}
+/* icon font */
+@font-face {
+  font-family: "photo-booth";
+  src: url("../fonts/photo-booth.eot");
+  src: url("../fonts/photo-booth.eot?#iefix") format("embedded-opentype"), url("../fonts/photo-booth.woff") format("woff"), url("../fonts/photo-booth.ttf") format("truetype"), url("../fonts/photo-booth.svg#photo-booth") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+/* line 347, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[data-icon]:before {
+  font-family: "photo-booth" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* line 360, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+[class^="button-"]:before,
+[class*=" button-"]:before {
+  font-family: "photo-booth" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* line 373, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-center:before {
+  content: "\61";
+}
+/* line 376, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-left:before {
+  content: "\62";
+}
+/* line 379, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-right:before {
+  content: "\63";
+}
+/* line 382, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.icon-camera-2:before {
+  content: "\64";
+}
+/* line 385, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.icon-camera-3:before {
+  content: "\65";
+}
+/* line 388, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.button-download:before {
+  content: "\67";
+}
+/* line 391, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.icon-download-2:before {
+  content: "\68";
+}
+/* line 394, /Users/josh/Documents/workspace/CodeAvengers/src/main/webapp/less/avengers-booth.less */
+.icon-download-3:before {
+  content: "\69";
+}
+/*# sourceMappingURL=avengers-booth.css.map */

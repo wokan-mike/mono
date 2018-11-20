@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script src="https://unpkg.com/interactjs@1.3.4/dist/interact.min.js"></script>
+    <script src="../hope/js/inter.js"></script>
+    <meta charset=utf-8 />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+        
+        /* The Modal (background) */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 100px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+        
+        /* Modal Content */
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+        }
+        
+        /* The Close Button */
+        .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .close2 {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .close2:hover,
+        .close2:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .overlay:before{
+        position: absolute;
+        content:" ";
+        width:300px;
+        height:300px;
+        display: block;
+        z-index:0;
+        background-color: rgba(255,0,0,0.5);
+        }
+        .animate{
+            width: 500px;
+            background-color: aqua;
+        }
+        .resize-container {
+            display: inline-block;
+        }
+        .resize-drag {
+            font-size: 20px;
+            font-family: sans-serif;
+            border-radius: 0px;
+            touch-action: none;
+        
+            width: 120px;
+        
+            /* This makes things *much* easier */
+            box-sizing: border-box;
+        }
+  
+    </style>
+    <style>
+        article, aside, figure, footer, header, hgroup, 
+        menu, nav, section { display: block; }
+    </style>
+</head>
+
+<body>
+
+    <h2>Modal Example</h2>
+    <canvas id="sou" class="resize-container"></canvas>
+
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn">Tomar Foto</button>
+    <button id="myBtn2" >Subir</button>
+
+    <div>
+        <a onclick="myFunction()">
+            <img src="../hope/net.png" style="height: 55px; width: 55px;"alt="">
+        </a>
+    </div>
+    
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content overlay ">
+        <span class="close">&times;</span>
+        <div>
+            <video width="300px" height="300px" autoplay></video>
+            
+            <input type="button" value="snaphsot!" id="snap" />
+        </div>
+        <!-- <input accept="image/*"  type="file" capture/> -->
+       
+    </div>
+
+    </div>
+
+    <div id="myModal2" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close2">&times;</span>
+            <input type="button" value="loadImg" onclick="document.getElementById('file').click();" />
+            <input type='file' id="file" style="display:none;"  onchange="readURL(this);" />
+            <img id="blah" src="#" class="overlay" />
+            <input type="button" value="guardar" onclick="take()">
+           
+        </div> 
+    </div>
+
+    <script>
+        function myFunction() {
+            var stick1 = document.createElement("IMG");
+            stick1.setAttribute("src", "../hope/net.png");
+            stick1.className = 'resize-drag';
+            document.body.appendChild(stick1);
+        }
+    </script>
+    <script>
+        function stick() {
+            var input = document.createElement("input");
+            input.className = 'resize-drag';
+            document.forms[0].appendChild(input);
+        }
+    </script>
+
+    <script>
+        function take() {
+            canvas = document.getElementById("sou")
+                html2canvas(document.querySelector("#blah"), {canvas: canvas}).then(canvas => {
+                console.log('Drew on the existing canvas');
+            });
+        }
+    </script>
+    <script>
+
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+
+        // Definición de variables globales
+
+        var localUserMedia = null;
+
+        var canvas = document.querySelector("canvas");
+
+        var video = document.querySelector("video");
+
+        var ctx = canvas.getContext("2d");
+
+        // Cuando cargamos el vídeo guardamos la relación
+
+        // de aspecto y ajustamos el tamaño del canvas
+
+        // para que se mantenga
+
+        video.addEventListener("loadedmetadata", function (e) {
+
+            var relation =  e.target.videoWidth/e.target.videoHeight;
+
+            canvas.width = 300;
+
+            canvas.height = 300/relation;
+
+        }, false);
+
+        // Capturamos el frame actual del video
+
+        document.getElementById("snap").addEventListener("click", function (e) {
+
+            if (localUserMedia) {
+
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+            }
+
+        }, false);
+
+        // Callback de error de getUserMedia
+
+        var onErrorCallback = function (e) {
+
+            console.log("Error!", e);
+
+        };
+
+        // Capturamos el video con getUserMedia y lo
+
+        // mandamos a un vídeo
+
+        navigator.getUserMedia({ video: true }, function (localMediaStream) {
+
+            var video = document.querySelector("video");
+
+            video.src = window.URL.createObjectURL(localMediaStream);
+
+            localUserMedia = localMediaStream;
+
+        }, onErrorCallback);
+
+    </script>
+    <script>
+        // Get the modal
+        var modal2 = document.getElementById('myModal');
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+        
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal2.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal2.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal2) {
+                modal2.style.display = "none";
+            }
+        }
+        </script>
+
+        <script>
+            // Get the modal
+            var modal = document.getElementById('myModal2');
+            
+            // Get the button that opens the modal
+            var btn = document.getElementById("myBtn2");
+            
+            // Get the <span> element that closes the modal
+            var span2 = document.getElementsByClassName("close2")[0];
+            
+            // When the user clicks the button, open the modal 
+            btn.onclick = function() {
+                modal.style.display = "block";
+            }
+            
+            // When the user clicks on <span> (x), close the modal
+            span2.onclick = function() {
+                modal.style.display = "none";
+            }
+            
+            // When the user clicks anywhere outside of the modal, close it
+            window.onclick = function(event) {
+                if (event.target == modal) {
+                    modal.style.display = "none";
+                }
+            }
+        </script>
+
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        $('#blah')
+                            .attr('src', e.target.result)
+                            .width(300)
+                            .height(300);
+                    };
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        </script>
+
+</body>
+
+</html>
