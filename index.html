@@ -69,8 +69,9 @@
         .overlay:before{
         position: absolute;
         content:" ";
+        margin-top: 45px;
         width:300px;
-        height:300px;
+        height:250px;
         display: block;
         z-index:0;
         background-color: rgba(255,0,0,0.5);
@@ -87,9 +88,6 @@
             font-family: sans-serif;
             border-radius: 0px;
             touch-action: none;
-        
-            width: 120px;
-        
             /* This makes things *much* easier */
             box-sizing: border-box;
         }
@@ -104,7 +102,10 @@
 <body>
 
     <h2>Modal Example</h2>
-    <canvas id="sou" class="resize-container"></canvas>
+    <div id="cont">
+        <canvas id="sou" class="resize-container"></canvas>
+    </div>
+    
 
     <!-- Trigger/Open The Modal -->
     <button id="myBtn">Tomar Foto</button>
@@ -115,7 +116,8 @@
             <img src="/mono/net.png" style="height: 55px; width: 55px;"alt="">
         </a>
     </div>
-    
+    <button onclick="deleteEl()" >Delete</button>
+    <button onclick="deleteAll()" >Delete ALL</button>
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
@@ -146,11 +148,40 @@
     </div>
 
     <script>
+        var contador = 0;
+
         function myFunction() {
+            var f = document.getElementById("cont");
             var stick1 = document.createElement("IMG");
             stick1.setAttribute("src", "/mono/net.png");
+            stick1.setAttribute("width", "50");
+            stick1.setAttribute("height", "50");
+            stick1.setAttribute("id", contador);
             stick1.className = 'resize-drag';
-            document.body.appendChild(stick1);
+            f.appendChild(stick1);
+            contador ++;
+        }
+
+        function deleteEl() {
+            contador = contador -1;
+            var elid = contador.toString();
+            console.log(elid);
+            
+            var f = document.getElementById("cont");
+            var child = document.getElementById(elid);
+            f.removeChild(child);
+        }
+        function deleteAll() {
+            for (let index = (contador -1); index >= 0; index--) {
+                var elid = index.toString();
+                console.log(elid);
+                
+                var f = document.getElementById("cont");
+                var child = document.getElementById(elid);
+                f.removeChild(child);
+                
+            }
+            
         }
     </script>
     <script>
@@ -171,7 +202,8 @@
     </script>
     <script>
 
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.mediaDevices.getUserMedia;
+        window.URL = window.URL || window.webkitURL || window.msURL || window.mozURL;
 
         // Definición de variables globales
 
@@ -223,7 +255,7 @@
 
         // mandamos a un vídeo
 
-        navigator.getUserMedia({ video: true }, function (localMediaStream) {
+        navigator.getUserMedia({ video: true}, function (localMediaStream) {
 
             var video = document.querySelector("video");
 
