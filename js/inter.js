@@ -1,3 +1,5 @@
+var angle = 0;
+
 interact('.resize-drag')
 .draggable({
       // enable inertial throwing
@@ -24,7 +26,19 @@ interact('.resize-drag')
               .toFixed(2) + 'px');
       }
   })
+  .gesturable({
+    onmove: function (event) {
+      var arrow = document.getElementsByClassName('resize-drag');
+  
+      angle += event.da;
+  
+      arrow.style.webkitTransform =
+      arrow.style.transform =
+        'rotate(' + angle + 'deg)';
+    }
+  })
   .resizable({
+      squareResize: true,
       // resize from all edges and corners
       edges: { left: true, right: true, bottom: true, top: true },
 
@@ -36,7 +50,7 @@ interact('.resize-drag')
 
       // minimum size
       restrictSize: {
-      min: { width: 50, height: 50 },
+      min: { width: 50, height: "auto" },
       },
 
       inertia: true,
@@ -48,7 +62,7 @@ interact('.resize-drag')
 
       // update the element's style
       target.style.width  = event.rect.width + 'px';
-      target.style.height = event.rect.height + 'px';
+      target.style.height = event.rect.width + 'px';
 
       // translate when resizing from top or left edges
       x += event.deltaRect.left;

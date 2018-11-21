@@ -92,6 +92,21 @@
             /* This makes things *much* easier */
             box-sizing: border-box;
         }
+        #slider {
+            margin-left:10px;
+        }
+        #picHolder {
+        width:250px;
+        height:240px;
+        margin:10px;
+
+        }
+        input[type='range'] {
+        -webkit-appearance: none;
+        padding-left:2px; padding-right:2px;
+        -webkit-border-radius: 5px;
+        background-image: -webkit-linear-gradient(top, #000000, #333333, #000000);
+        }
   
     </style>
     <style>
@@ -142,12 +157,31 @@
             <span class="close2">&times;</span>
             <input type="button" value="loadImg" onclick="document.getElementById('file').click();" />
             <input type='file' id="file" style="display:none;"  onchange="readURL(this);" />
-            <img id="blah" src="#" class="overlay" />
+            <div id="picHolder" style="overflow: hidden">
+                <img id="blah" src="#" class="resize-drag"/>
+            </div>
+            
             <input type="button" value="guardar" onclick="take()">
-           
+
+            <div id="slider">
+                5% <input id="slide" type="range"
+                 min="5" max="200" step="5" value="100"
+                 onchange="updateSlider(this.value)" />
+                 200%
+                </div><br/>
         </div> 
     </div>
 
+    <script>
+        function updateSlider(slideAmount) {
+            //get the element
+            var pic = document.getElementById("blah");
+            //set the dimensions
+            pic.style.width=slideAmount+"%";
+            pic.style.height=slideAmount+"%";
+
+        }
+    </script>
     <script>
         var contador = 0;
 
@@ -196,7 +230,7 @@
     <script>
         function take() {
             canvas = document.getElementById("sou")
-                html2canvas(document.querySelector("#blah"), {canvas: canvas}).then(canvas => {
+                html2canvas(document.querySelector("#picHolder"), {canvas: canvas}).then(canvas => {
                 console.log('Drew on the existing canvas');
             });
         }
