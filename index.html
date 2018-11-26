@@ -101,13 +101,21 @@
         margin:10px;
 
         }
+        .video{
+            transform: rotateY(180deg);
+            -webkit-transform:rotateY(180deg); /* Safari and Chrome */
+            -moz-transform:rotateY(180deg);
+        }
         input[type='range'] {
         -webkit-appearance: none;
         padding-left:2px; padding-right:2px;
         -webkit-border-radius: 5px;
         background-image: -webkit-linear-gradient(top, #000000, #333333, #000000);
         }
-  
+        .popup {
+			display: none;
+		}
+
     </style>
     <style>
         article, aside, figure, footer, header, hgroup, 
@@ -119,7 +127,7 @@
 
     <h2>Modal Example</h2>
     <div id="cont">
-        <canvas id="sou" class="resize-container"></canvas>
+        <canvas id="sou" class="resize-container" onclick="disapear()"></canvas>
     </div>
     
 
@@ -141,7 +149,7 @@
     <div class="modal-content overlay ">
         <span class="close">&times;</span>
         <div>
-            <video width="300px" height="300px" autoplay playsinline></video>
+            <video width="300px" height="300px" class="video"autoplay playsinline muted></video>
             
             <input type="button" value="snaphsot!" id="snap" />
         </div>
@@ -150,28 +158,146 @@
     </div>
 
     </div>
-
     <div id="myModal2" class="modal">
-        <!-- Modal content -->
-        <div class="modal-content">
-            <span class="close2">&times;</span>
-            <input type="button" value="loadImg" onclick="document.getElementById('file').click();" />
-            <input type='file' id="file" style="display:none;"  onchange="readURL(this);" />
-            <div id="picHolder" style="overflow: hidden">
-                <img id="blah" src="#" class="resize-drag"/>
-            </div>
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close2">&times;</span>
+                <input type="button" value="loadImg" onclick="document.getElementById('file').click();" />
+                <input type='file' id="file" style="display:none;"  onchange="readURL(this);" />
+                <div id="picHolder" style="overflow: hidden">
+                    <img id="blah" src="#" class="resize-drag2"/>
+                </div>
+                
+                <input type="button" value="guardar" onclick="take()">
+                <button onclick="rotaI('blah')" > <==</button>
+                <button onclick="rota('blah')" >==></button>
+                
+    
+                <div id="slider">
+                    5% <input id="slide" type="range"
+                     min="100" max="200" step="5" value="100"
+                     onchange="updateSlider(this.value)" />
+                     200%
+                    </div><br/>
+            </div> 
+        </div>
+
+    <script>
+        var cont = 1;
+        var ang = 0;
+        var ancho = 200;
+
+        var contador = 0;
+
+        function myFunction() {
+            var f = document.getElementById("cont");
+            var RI = document.createElement("BUTTON");
+            var RD = document.createElement("BUTTON");
+            var ZI = document.createElement("BUTTON");
+            var ZO = document.createElement("BUTTON");
+            var di = document.createElement("DIV");
+            var di2 = document.createElement("DIV");
+            var di3 = document.createElement("DIV");
+            var stick1 = document.createElement("IMG");
+            var title = document.createTextNode("titulo");
+            var title2 = document.createTextNode("titulo");
+            var title3 = document.createTextNode("titulo");
+            var title4 = document.createTextNode("titulo");
+            stick1.setAttribute("id", contador);
+            RI.setAttribute("onClick","rotaI(" + contador + ")");
+            RD.setAttribute("onClick","rota(" + contador + ")");
+            ZI.setAttribute("onClick","zoomI(" + contador + ")");
+            ZO.setAttribute("onClick","zoomO(" + contador + ")");
+            di.setAttribute("onClick","apear("+ contador +")" );
+            di2.setAttribute("onClick","apear("+ contador +")" );
+            di3.setAttribute("onClick","apear("+ contador +")" );
+            di3.setAttribute("id","1"+ contador );
+            stick1.setAttribute("onClick","apear()");
+            RI.appendChild(title);
+            RD.appendChild(title2);
+            ZI.appendChild(title3);
+            ZO.appendChild(title4);
+            di.appendChild(RI);
+            di.appendChild(RD);
+            di.appendChild(ZI);
+            di.appendChild(ZO);
+            di2.appendChild(stick1);
+            di3.appendChild(di);
+            di3.appendChild(di2);
+            di.className = 'popup';
+            di.setAttribute("id","2"+ contador );
+            stick1.setAttribute("src", "/mono/net.png");
+            di3.setAttribute("style", "width :18% !important; height: 18% !important");
+            // stick1.setAttribute("id", contador);
+            di3.className = 'resize-drag';
+            f.appendChild(di3);
+            contador ++;
+        }
+        function rota(id) {
+            ang = ang + 45;
+            document.getElementById(id).style.transform = "rotate(" + (ang) + "deg)";
+            if (ang/360 == 1) {
+                ang = 45
+            }
+        }
+        function rotaI(id) {
+            ang = ang - 45;
+            document.getElementById(id).style.transform = "rotate(" + (ang) + "deg)";   
+            if (ang/-360 == 1) {
+                ang = 45
+            }
+        }
+        function zoomO(id) {
+            ancho = ancho + 50;
+            document.getElementById(id).style.width = ancho +"px";
+            document.getElementById(id).style.height = ancho +"px";
+            if (ancho== 500) {
+                ancho = 200
+            }
+        }
+        function zoomI(id) {
+            ancho = ancho - 50;
+            document.getElementById(id).style.width = ancho +"px";
+            document.getElementById(id).style.height = ancho +"px";
+            if (ancho <= 50) {
+                ancho = 200
+            }
+        }
+        function apear(id) {
+            document.getElementById("2" + id).style.display = "block";
+            console.log(id);
             
-            <input type="button" value="guardar" onclick="take()">
-
-            <div id="slider">
-                5% <input id="slide" type="range"
-                 min="5" max="200" step="5" value="100"
-                 onchange="updateSlider(this.value)" />
-                 200%
-                </div><br/>
-        </div> 
-    </div>
-
+        }
+        function disapear() {
+            var elems = document.getElementsByClassName('popup');
+            for (var i=0;i<elems.length;i+=1){
+            elems[i].style.display = 'none';
+}
+        }
+        function deleteEl() {
+            contador = contador -1;
+            var elid = "1"+ contador;
+            console.log(elid);
+            
+            var f = document.getElementById("cont");
+            var child = document.getElementById(elid);
+            f.removeChild(child);
+        }
+        function deleteAll() {
+            for (let index = (contador -1); index >= 0; index--) {
+                var elid = "1"+ index;
+                console.log(elid);
+                
+                var f = document.getElementById("cont");
+                var child = document.getElementById(elid);
+                f.removeChild(child);
+                contador = 0;
+                
+            }
+            
+        }
+        
+    </script>
     <script>
         function updateSlider(slideAmount) {
             //get the element
@@ -183,41 +309,10 @@
         }
     </script>
     <script>
-        var contador = 0;
+       
+        
 
-        function myFunction() {
-            var f = document.getElementById("cont");
-            var stick1 = document.createElement("IMG");
-            stick1.setAttribute("src", "/mono/net.png");
-            stick1.setAttribute("width", "50");
-            stick1.setAttribute("height", "50");
-            stick1.setAttribute("id", contador);
-            stick1.className = 'resize-drag';
-            f.appendChild(stick1);
-            contador ++;
-        }
-
-        function deleteEl() {
-            contador = contador -1;
-            var elid = contador.toString();
-            console.log(elid);
-            
-            var f = document.getElementById("cont");
-            var child = document.getElementById(elid);
-            f.removeChild(child);
-        }
-        function deleteAll() {
-            for (let index = (contador -1); index >= 0; index--) {
-                var elid = index.toString();
-                console.log(elid);
-                
-                var f = document.getElementById("cont");
-                var child = document.getElementById(elid);
-                f.removeChild(child);
-                
-            }
-            
-        }
+        
     </script>
     <script>
         function stick() {
@@ -327,52 +422,52 @@
                 modal2.style.display = "none";
             }
         }
-        </script>
+    </script>
 
-        <script>
-            // Get the modal
-            var modal = document.getElementById('myModal2');
-            
-            // Get the button that opens the modal
-            var btn = document.getElementById("myBtn2");
-            
-            // Get the <span> element that closes the modal
-            var span2 = document.getElementsByClassName("close2")[0];
-            
-            // When the user clicks the button, open the modal 
-            btn.onclick = function() {
-                modal.style.display = "block";
-            }
-            
-            // When the user clicks on <span> (x), close the modal
-            span2.onclick = function() {
+    <script>
+        // Get the modal
+        var modal = document.getElementById('myModal2');
+        
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn2");
+        
+        // Get the <span> element that closes the modal
+        var span2 = document.getElementsByClassName("close2")[0];
+        
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        
+        // When the user clicks on <span> (x), close the modal
+        span2.onclick = function() {
+            modal.style.display = "none";
+        }
+        
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
                 modal.style.display = "none";
             }
-            
-            // When the user clicks anywhere outside of the modal, close it
-            window.onclick = function(event) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
+        }
+    </script>
+
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(300)
+                        .height(300);
+                };
+
+                reader.readAsDataURL(input.files[0]);
             }
-        </script>
-
-        <script>
-            function readURL(input) {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        $('#blah')
-                            .attr('src', e.target.result)
-                            .width(300)
-                            .height(300);
-                    };
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        </script>
+        }
+    </script>
 
 </body>
 
